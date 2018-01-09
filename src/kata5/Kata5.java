@@ -29,6 +29,23 @@ public class Kata5 {
             System.out.print(rs.getString(3)+ " ");
             System.out.println(rs.getString(4));
         }
+        query = "CREATE TABLE IF NOT EXISTS MAIL ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'mail' TEXT NOT NULL)";
+        st.execute(query);
+        
+        
+        String filename = ".\\src\\Kata5\\emails.txt";
+        BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+        String mail;
+        while((mail=reader.readLine())!= null){
+            if(!mail.contains("@"))continue;
+            query= "INSERT INTO MAIL (mail) VALUES ('"+ mail +"')";
+            st.execute(query);
+            
+        }
+        
+        rs.close();
+        st.close();
+        con.close();
         
     }
     
